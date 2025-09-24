@@ -1,0 +1,70 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "The Fellowship of the Ring",
+      "price": 15.99,
+      "pages": 423,
+      "cover_type": "Paperback",
+      "description": "The first volume in J.R.R. Tolkien's epic masterwork, The Lord of the Rings. Follow Frodo Baggins as he begins his perilous journey to destroy the One Ring.",
+      "image_url": "/assets/products/fellowship.jpg",
+      "trilogy_id": "lotr",
+      "trilogy_order": 1
+    },
+    {
+      "id": "2", 
+      "name": "The Two Towers",
+      "price": 16.99,
+      "pages": 447,
+      "cover_type": "Paperback", 
+      "description": "The second volume of The Lord of the Rings continues the epic tale as the Fellowship is broken and darkness spreads across Middle-earth.",
+      "image_url": "/assets/products/two-towers.jpg",
+      "trilogy_id": "lotr",
+      "trilogy_order": 2
+    },
+    {
+      "id": "3",
+      "name": "The Return of the King", 
+      "price": 17.99,
+      "pages": 555,
+      "cover_type": "Hard Cover",
+      "description": "The final volume of The Lord of the Rings brings the epic tale to its stunning conclusion as the fate of Middle-earth hangs in the balance.",
+      "image_url": "/assets/products/return-king.jpg", 
+      "trilogy_id": "lotr",
+      "trilogy_order": 3
+    },
+    {
+      "id": "4",
+      "name": "The Hunger Games",
+      "price": 12.99,
+      "pages": 374,
+      "cover_type": "Paperback",
+      "description": "In the ruins of North America lies Panem, where sixteen-year-old Katniss Everdeen volunteers for the Hunger Games in place of her younger sister.",
+      "image_url": "/assets/products/hunger-games.jpg",
+      "trilogy_id": "hunger-games",
+      "trilogy_order": 1
+    },
+    {
+      "id": "5",
+      "name": "Catching Fire",
+      "price": 13.99,
+      "pages": 391,
+      "cover_type": "Paperback",
+      "description": "Katniss Everdeen has survived the Hunger Games, but the rebellion she has sparked is spreading across Panem in this explosive sequel.",
+      "image_url": "/assets/products/catching-fire.jpg",
+      "trilogy_id": "hunger-games",
+      "trilogy_order": 2
+    },
+    {
+      "id": "6",
+      "name": "Mockingjay",
+      "price": 14.99,
+      "pages": 390,
+      "cover_type": "Hard Cover",
+      "description": "The final book in The Hunger Games trilogy brings Katniss face to face with President Snow in a final battle for Panem's future.",
+      "image_url": "/assets/products/mockingjay.jpg",
+      "trilogy_id": "hunger-games",
+      "trilogy_order": 3
+    }
+  ]
+}
