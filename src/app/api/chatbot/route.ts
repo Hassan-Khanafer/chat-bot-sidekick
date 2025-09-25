@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { generateChatResponse } from '@/app/lib/llm/gpt'
 import { ChatContext, Product } from '@/app/types'
 import { getProducts, getProductReviews, getProductSales, getAllProductSales, getAllReviews } from '@/app/lib/supabase/queries'
+import { getShippingOptions } from '@/app/lib/shipping'
+import { getTrilogyDeals, getAgeRecommendation } from '@/app/lib/deals'
 
 export async function POST(request: Request) {
   try {
@@ -36,6 +38,24 @@ export async function POST(request: Request) {
     const reviewResponse = await checkForReviewQuestion(message, products)
     if (reviewResponse) {
       return NextResponse.json({ message: reviewResponse })
+    }
+
+    // Check for shipping questions
+    const shippingResponse = checkForShippingQuestion(message)
+    if (shippingResponse) {
+      return NextResponse.json({ message: shippingResponse })
+    }
+
+    // Check for age recommendation questions
+    const ageResponse = checkForAgeQuestion(message, products)
+    if (ageResponse) {
+      return NextResponse.json({ message: ageResponse })
+    }
+
+    // Check for deals questions
+    const dealsResponse = checkForDealsQuestion(message, products)
+    if (dealsResponse) {
+      return NextResponse.json({ message: dealsResponse })
     }
 
     // Check for personalization opportunities
@@ -244,4 +264,121 @@ async function checkForReviewQuestion(message: string, products: Product[]): Pro
   }
 
   return null
+}
+
+function checkForShippingQuestion(message: string): string | null {
+  const lowerMessage = message.toLowerCase()
+  
+  const isShippingQuestion = 
+    lowerMessage.includes('delivery') || 
+    lowerMessage.includes('shipping') || 
+    lowerMessage.includes('ship') ||
+    lowerMessage.includes('how long') ||
+    lowerMessage.includes('delivery options')
+
+  if (!isShippingQuestion) {
+    return null
+  }
+
+  const shippingOptions = getShippingOptions()
+  let response = "We offer the following delivery options:\n\n"
+  
+  shippingOptions.forEach(option => {
+    const priceText = option.price > 0 ? `$${option.price}` : 'Free'
+    response += `• **${option.type.charAt(0).toUpperCase() + option.type.slice(1)} Shipping**: ${priceText} - ${option.description}\n`
+  })
+  
+  response += "\nStandard shipping is free for all orders. Priority shipping gets your books to you in just 1-2 business days!"
+  
+  return response
+}
+
+function checkForAgeQuestion(message: string, products: Product[]): string | null {
+  const lowerMessage = message.toLowerCase()
+  
+  const isAgeQuestion = 
+    lowerMessage.includes('age') || 
+    lowerMessage.includes('children') || 
+    lowerMessage.includes('kids') ||
+    lowerMessage.includes('young adult') ||
+    lowerMessage.includes('teen') ||
+    lowerMessage.includes('appropriate')
+
+  if (!isAgeQuestion) {
+    return null
+  }
+
+  // Check if asking about a specific book
+  for (const product of products) {
+    const productNameLower = product.name.toLowerCase()
+    if (lowerMessage.includes(productNameLower)) {
+      const ageRec = getAgeRecommendation(product)
+      const genre = product.genre || 'General Fiction'
+      
+      let response = `"${product.name}" is recommended for ages ${ageRec} and up. `
+      
+      if (ageRec === '12+') {
+        response += "This book is suitable for young adults and adults. It contains fantasy themes and adventure suitable for mature readers."
+      } else if (ageRec === '14+') {
+        response += "This book is recommended for teens and adults. It contains themes that may be more intense for younger readers."
+      }
+      
+      response += ` It's classified as ${genre}.`
+      
+      return response
+    }
+  }
+
+  // General age recommendations
+  const ageGroups = products.reduce((acc, product) => {
+    const age = getAgeRecommendation(product)
+    if (!acc[age]) acc[age] = []
+    acc[age].push(product.name)
+    return acc
+  }, {} as Record<string, string[]>)
+
+  let response = "Here are our age recommendations:\n\n"
+  
+  Object.entries(ageGroups).forEach(([age, books]) => {
+    response += `**Ages ${age}**: ${books.join(', ')}\n`
+  })
+  
+  return response
+}
+
+function checkForDealsQuestion(message: string, products: Product[]): string | null {
+  const lowerMessage = message.toLowerCase()
+  
+  const isDealsQuestion = 
+    lowerMessage.includes('deal') || 
+    lowerMessage.includes('discount') || 
+    lowerMessage.includes('sale') ||
+    lowerMessage.includes('bundle') ||
+    lowerMessage.includes('trilogy') ||
+    lowerMessage.includes('cheaper') ||
+    lowerMessage.includes('save')
+
+  if (!isDealsQuestion) {
+    return null
+  }
+
+  const deals = getTrilogyDeals(products)
+  
+  if (deals.length === 0) {
+    return "We don't currently have any special deals, but we're always adding new promotions! Check back soon for bundle discounts."
+  }
+
+  let response = "Yes! We have some great trilogy deals available:\n\n"
+  
+  deals.forEach(deal => {
+    const savingsPercent = Math.round((deal.savings / deal.individual_price) * 100)
+    response += `**${deal.trilogy_name} Trilogy Bundle**:\n`
+    response += `• Individual price: $${deal.individual_price.toFixed(2)}\n`
+    response += `• Bundle price: $${deal.bundle_price.toFixed(2)}\n`
+    response += `• You save: $${deal.savings.toFixed(2)} (${savingsPercent}% off!)\n\n`
+  })
+  
+  response += "Buying the complete trilogy saves you money compared to purchasing each book individually!"
+  
+  return response
 }

@@ -9,7 +9,9 @@
       "description": "The first volume in J.R.R. Tolkien's epic masterwork, The Lord of the Rings. Follow Frodo Baggins as he begins his perilous journey to destroy the One Ring.",
       "image_url": "/assets/products/fellowship.jpg",
       "trilogy_id": "lotr",
-      "trilogy_order": 1
+      "trilogy_order": 1,
+      "age_recommendation": "12+",
+      "genre": "Fantasy"
     },
     {
       "id": "2", 
@@ -20,7 +22,9 @@
       "description": "The second volume of The Lord of the Rings continues the epic tale as the Fellowship is broken and darkness spreads across Middle-earth.",
       "image_url": "/assets/products/two-towers.jpg",
       "trilogy_id": "lotr",
-      "trilogy_order": 2
+      "trilogy_order": 2,
+      "age_recommendation": "12+",
+      "genre": "Fantasy"
     },
     {
       "id": "3",
@@ -31,7 +35,9 @@
       "description": "The final volume of The Lord of the Rings brings the epic tale to its stunning conclusion as the fate of Middle-earth hangs in the balance.",
       "image_url": "/assets/products/return-king.jpg", 
       "trilogy_id": "lotr",
-      "trilogy_order": 3
+      "trilogy_order": 3,
+      "age_recommendation": "12+",
+      "genre": "Fantasy"
     },
     {
       "id": "4",
@@ -42,7 +48,9 @@
       "description": "In the ruins of North America lies Panem, where sixteen-year-old Katniss Everdeen volunteers for the Hunger Games in place of her younger sister.",
       "image_url": "/assets/products/hunger-games.jpg",
       "trilogy_id": "hunger-games",
-      "trilogy_order": 1
+      "trilogy_order": 1,
+      "age_recommendation": "14+",
+      "genre": "Dystopian Fiction"
     },
     {
       "id": "5",
@@ -53,7 +61,9 @@
       "description": "Katniss Everdeen has survived the Hunger Games, but the rebellion she has sparked is spreading across Panem in this explosive sequel.",
       "image_url": "/assets/products/catching-fire.jpg",
       "trilogy_id": "hunger-games",
-      "trilogy_order": 2
+      "trilogy_order": 2,
+      "age_recommendation": "14+",
+      "genre": "Dystopian Fiction"
     },
     {
       "id": "6",
@@ -64,7 +74,9 @@
       "description": "The final book in The Hunger Games trilogy brings Katniss face to face with President Snow in a final battle for Panem's future.",
       "image_url": "/assets/products/mockingjay.jpg",
       "trilogy_id": "hunger-games",
-      "trilogy_order": 3
+      "trilogy_order": 3,
+      "age_recommendation": "14+",
+      "genre": "Dystopian Fiction"
     }
   ]
 }

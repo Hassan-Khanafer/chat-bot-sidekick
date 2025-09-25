@@ -16,6 +16,8 @@ CREATE TABLE products (
     trilogy_id UUID,
     trilogy_order INTEGER,
     shipment_days INTEGER DEFAULT 3,
+    age_recommendation TEXT,
+    genre TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -62,13 +64,13 @@ CREATE INDEX idx_user_activity_user_product ON user_activity(user_id, product_id
 CREATE INDEX idx_sales_product_id ON sales(product_id);
 
 -- Insert sample data
-INSERT INTO products (id, name, price, pages, cover_type, description, image_url, trilogy_id, trilogy_order, shipment_days) VALUES
-('1', 'The Fellowship of the Ring', 15.99, 423, 'Paperback', 'The first volume in J.R.R. Tolkien''s epic masterwork, The Lord of the Rings. Follow Frodo Baggins as he begins his perilous journey to destroy the One Ring.', '/assets/products/fellowship.jpg', 'lotr', 1, 2),
-('2', 'The Two Towers', 16.99, 447, 'Paperback', 'The second volume of The Lord of the Rings continues the epic tale as the Fellowship is broken and darkness spreads across Middle-earth.', '/assets/products/two-towers.jpg', 'lotr', 2, 3),
-('3', 'The Return of the King', 17.99, 555, 'Hard Cover', 'The final volume of The Lord of the Rings brings the epic tale to its stunning conclusion as the fate of Middle-earth hangs in the balance.', '/assets/products/return-king.jpg', 'lotr', 3, 5),
-('4', 'The Hunger Games', 12.99, 374, 'Paperback', 'In the ruins of North America lies Panem, where sixteen-year-old Katniss Everdeen volunteers for the Hunger Games in place of her younger sister.', '/assets/products/hunger-games.jpg', 'hunger-games', 1, 2),
-('5', 'Catching Fire', 13.99, 391, 'Paperback', 'Katniss Everdeen has survived the Hunger Games, but the rebellion she has sparked is spreading across Panem in this explosive sequel.', '/assets/products/catching-fire.jpg', 'hunger-games', 2, 3),
-('6', 'Mockingjay', 14.99, 390, 'Hard Cover', 'The final book in The Hunger Games trilogy brings Katniss face to face with President Snow in a final battle for Panem''s future.', '/assets/products/mockingjay.jpg', 'hunger-games', 3, 4);
+INSERT INTO products (id, name, price, pages, cover_type, description, image_url, trilogy_id, trilogy_order, shipment_days, age_recommendation, genre) VALUES
+('1', 'The Fellowship of the Ring', 15.99, 423, 'Paperback', 'The first volume in J.R.R. Tolkien''s epic masterwork, The Lord of the Rings. Follow Frodo Baggins as he begins his perilous journey to destroy the One Ring.', '/assets/products/fellowship.jpg', 'lotr', 1, 2, '12+', 'Fantasy'),
+('2', 'The Two Towers', 16.99, 447, 'Paperback', 'The second volume of The Lord of the Rings continues the epic tale as the Fellowship is broken and darkness spreads across Middle-earth.', '/assets/products/two-towers.jpg', 'lotr', 2, 3, '12+', 'Fantasy'),
+('3', 'The Return of the King', 17.99, 555, 'Hard Cover', 'The final volume of The Lord of the Rings brings the epic tale to its stunning conclusion as the fate of Middle-earth hangs in the balance.', '/assets/products/return-king.jpg', 'lotr', 3, 5, '12+', 'Fantasy'),
+('4', 'The Hunger Games', 12.99, 374, 'Paperback', 'In the ruins of North America lies Panem, where sixteen-year-old Katniss Everdeen volunteers for the Hunger Games in place of her younger sister.', '/assets/products/hunger-games.jpg', 'hunger-games', 1, 2, '14+', 'Dystopian Fiction'),
+('5', 'Catching Fire', 13.99, 391, 'Paperback', 'Katniss Everdeen has survived the Hunger Games, but the rebellion she has sparked is spreading across Panem in this explosive sequel.', '/assets/products/catching-fire.jpg', 'hunger-games', 2, 3, '14+', 'Dystopian Fiction'),
+('6', 'Mockingjay', 14.99, 390, 'Hard Cover', 'The final book in The Hunger Games trilogy brings Katniss face to face with President Snow in a final battle for Panem''s future.', '/assets/products/mockingjay.jpg', 'hunger-games', 3, 4, '14+', 'Dystopian Fiction');
 
 -- Insert sample reviews
 INSERT INTO reviews (product_id, rating, review_text) VALUES

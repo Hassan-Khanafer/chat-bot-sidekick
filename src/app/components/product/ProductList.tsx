@@ -16,7 +16,7 @@ export function ProductList({ onProductClick }: ProductListProps) {
       try {
         const productsData = await getProducts()
         setProducts(productsData)
-      } catch (_error) {
+      } catch {
         // Handle error silently in production
         // Could implement proper error reporting here
       } finally {

@@ -59,7 +59,7 @@ export function ChatbotUI({ currentProduct, userActivity = [] }: ChatbotUIProps)
       }
       
       setMessages(prev => [...prev, assistantMessage])
-    } catch (_error) {
+    } catch {
       // Handle error silently in production
       const errorMessage: ChatMessage = {
         id: generateId(),

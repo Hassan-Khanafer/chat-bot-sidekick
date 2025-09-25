@@ -9,6 +9,24 @@ export interface Product {
   trilogy_id?: string;
   trilogy_order?: number;
   shipment_days?: number;
+  age_recommendation?: string;
+  genre?: string;
+}
+
+export interface ShippingOption {
+  type: 'standard' | 'priority';
+  days: number;
+  price: number;
+  description: string;
+}
+
+export interface TrilogyDeal {
+  trilogy_id: string;
+  trilogy_name: string;
+  individual_price: number;
+  bundle_price: number;
+  savings: number;
+  books: Product[];
 }
 
 export interface ProductWithReviews extends Product {
