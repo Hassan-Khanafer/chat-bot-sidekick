@@ -91,3 +91,61 @@ export async function getProductReviews(productId: string): Promise<Review[]> {
 
   return data || []
 }
+
+export async function getAllReviews(): Promise<Review[]> {
+  const { data, error } = await supabase
+    .from('reviews')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching all reviews:', error)
+    return []
+  }
+
+  return data || []
+}
+
+export async function getReviewsByRating(rating: number): Promise<Review[]> {
+  const { data, error } = await supabase
+    .from('reviews')
+    .select('*')
+    .eq('rating', rating)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching reviews by rating:', error)
+    return []
+  }
+
+  return data || []
+}
+
+// Sales queries
+export async function getProductSales(productId: string): Promise<number> {
+  const { data, error } = await supabase
+    .from('sales')
+    .select('quantity_sold')
+    .eq('product_id', productId)
+    .single()
+
+  if (error) {
+    console.error('Error fetching sales:', error)
+    return 0
+  }
+
+  return data?.quantity_sold || 0
+}
+
+export async function getAllProductSales(): Promise<Array<{ product_id: string; quantity_sold: number }>> {
+  const { data, error } = await supabase
+    .from('sales')
+    .select('product_id, quantity_sold')
+
+  if (error) {
+    console.error('Error fetching all sales:', error)
+    return []
+  }
+
+  return data || []
+}

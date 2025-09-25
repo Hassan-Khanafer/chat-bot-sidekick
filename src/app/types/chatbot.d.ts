@@ -14,6 +14,7 @@ export interface ChatContextProduct {
   description?: string;
   trilogy_id?: string;
   trilogy_order?: number;
+  shipment_days?: number;
 }
 
 export interface ChatContext {

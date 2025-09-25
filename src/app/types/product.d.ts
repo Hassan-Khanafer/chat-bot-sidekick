@@ -8,6 +8,7 @@ export interface Product {
   image_url?: string;
   trilogy_id?: string;
   trilogy_order?: number;
+  shipment_days?: number;
 }
 
 export interface ProductWithReviews extends Product {
@@ -33,5 +34,6 @@ export interface Review {
   user_id?: string;
   rating?: number;
   review_text: string;
+  customer_alias?: string;
   created_at: string;
 }

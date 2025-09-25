@@ -59,6 +59,11 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <label className="text-sm font-medium text-medium-gray">Cover Type</label>
                 <p className="text-lg text-dark-gray">{product.cover_type}</p>
               </div>
+              
+              <div>
+                <label className="text-sm font-medium text-medium-gray">Shipment Time</label>
+                <p className="text-lg text-dark-gray">{product.shipment_days || 3} business days</p>
+              </div>
             </div>
             
             {product.description && (
@@ -69,12 +74,6 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 </p>
               </div>
             )}
-            
-            <div className="pt-2">
-              <p className="text-xs text-medium-gray">
-                Estimated delivery: 3-5 business days
-              </p>
-            </div>
           </div>
         </div>
       </DialogContent>

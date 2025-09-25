@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Product } from '@/app/types'
 import { ProductCard } from './ProductCard'
-import productsData from '@/data/products.json'
+import { getProducts } from '@/app/lib/supabase/queries'
 
 interface ProductListProps {
   onProductClick: (product: Product) => void
@@ -12,13 +12,10 @@ export function ProductList({ onProductClick }: ProductListProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // In a real app, this would fetch from the API
-    // For now, we'll use the mock data
     const loadProducts = async () => {
       try {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 300))
-        setProducts(productsData.products as Product[])
+        const productsData = await getProducts()
+        setProducts(productsData)
       } catch (error) {
         console.error('Failed to load products:', error)
       } finally {

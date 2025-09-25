@@ -86,6 +86,7 @@ Available books catalog:`
    - Price: $${product.price}
    - Pages: ${product.pages}
    - Cover: ${product.cover_type}
+   - Shipment: ${(product as any).shipment_days || 3} business days
    - Description: ${product.description || 'No description available'}
    - Trilogy: ${product.trilogy_id || 'Standalone'} (Book ${product.trilogy_order || 'N/A'})`
     })
