@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter } from '@/app/components/ui/card'
+import { Card, CardContent } from '@/app/components/ui/card'
 import { formatPrice } from '@/app/lib/utils'
 import { Product } from '@/app/types'
 import Image from 'next/image'

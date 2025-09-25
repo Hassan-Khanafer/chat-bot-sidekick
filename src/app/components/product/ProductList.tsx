@@ -16,8 +16,9 @@ export function ProductList({ onProductClick }: ProductListProps) {
       try {
         const productsData = await getProducts()
         setProducts(productsData)
-      } catch (error) {
-        console.error('Failed to load products:', error)
+      } catch (_error) {
+        // Handle error silently in production
+        // Could implement proper error reporting here
       } finally {
         setIsLoading(false)
       }

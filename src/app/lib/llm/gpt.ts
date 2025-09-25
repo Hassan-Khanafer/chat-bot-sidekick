@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import { ChatMessage, ChatContext, Product, Review } from '@/app/types'
+import { ChatMessage, ChatContext, Product } from '@/app/types'
 
 // Provider configuration
 const PROVIDER = process.env.LLM_PROVIDER || 'groq'
@@ -36,24 +36,26 @@ export async function generateChatResponse(
       if (!openai) {
         openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
       }
-      const completionAny = await openai.chat.completions.create({
+      const completion = await openai.chat.completions.create({
         model: MODEL,
         messages,
         max_tokens: 180,
         temperature: 0.6,
-      }) as any
+      })
 
-      return completionAny?.choices?.[0]?.message?.content || "I apologize, but I couldn't generate a response. Please try again."
+      return completion?.choices?.[0]?.message?.content || "I apologize, but I couldn't generate a response. Please try again."
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    // eslint-disable-next-line no-console
     console.error('Error generating chat response:', error)
-    const code = error?.code || error?.error?.code
+    const errorObj = error as { code?: string; error?: { code?: string }; message?: string; status?: number }
+    const code = errorObj?.code || errorObj?.error?.code
     if (PROVIDER === 'ollama') {
-      if (code === 'ECONNREFUSED' || /fetch failed|ECONNREFUSED/i.test(String(error?.message))) {
+      if (code === 'ECONNREFUSED' || /fetch failed|ECONNREFUSED/i.test(String(errorObj?.message))) {
         return "Local LLM is not reachable. Start Ollama (ollama serve) and pull the model." 
       }
     }
-    if (code === 'insufficient_quota' || error?.status === 429) {
+    if (code === 'insufficient_quota' || errorObj?.status === 429) {
       return "I'm temporarily at capacity due to quota limits. Please try again shortly."
     }
     throw new Error('Failed to generate response')
@@ -86,7 +88,7 @@ Available books catalog:`
    - Price: $${product.price}
    - Pages: ${product.pages}
    - Cover: ${product.cover_type}
-   - Shipment: ${(product as any).shipment_days || 3} business days
+   - Shipment: ${product.shipment_days || 3} business days
    - Description: ${product.description || 'No description available'}
    - Trilogy: ${product.trilogy_id || 'Standalone'} (Book ${product.trilogy_order || 'N/A'})`
     })
@@ -150,24 +152,26 @@ Create a 2-3 sentence review summary that sounds like it came from real readers.
       if (!openai) {
         openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
       }
-      const completionAny = await openai.chat.completions.create({
+      const completion = await openai.chat.completions.create({
         model: MODEL,
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 120,
         temperature: 0.7,
-      }) as any
+      })
 
-      return completionAny?.choices?.[0]?.message?.content || "Reviews are currently unavailable for this book."
+      return completion?.choices?.[0]?.message?.content || "Reviews are currently unavailable for this book."
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    // eslint-disable-next-line no-console
     console.error('Error generating product review:', error)
-    const code = error?.code || error?.error?.code
+    const errorObj = error as { code?: string; error?: { code?: string }; message?: string; status?: number }
+    const code = errorObj?.code || errorObj?.error?.code
     if (PROVIDER === 'ollama') {
-      if (code === 'ECONNREFUSED' || /fetch failed|ECONNREFUSED/i.test(String(error?.message))) {
+      if (code === 'ECONNREFUSED' || /fetch failed|ECONNREFUSED/i.test(String(errorObj?.message))) {
         return "Local LLM is not reachable. Please start Ollama (ollama serve)."
       }
     }
-    if (code === 'insufficient_quota' || error?.status === 429) {
+    if (code === 'insufficient_quota' || errorObj?.status === 429) {
       return "Reviews are temporarily unavailable due to quota limits. Please try again soon."
     }
     return "I'm having trouble accessing reviews right now. Please try again later."
@@ -220,6 +224,7 @@ async function callGroqChat(
   messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>
 ): Promise<string> {
   if (!GROQ_API_KEY) {
+    // eslint-disable-next-line no-console
     console.error('GROQ_API_KEY not provided')
     return ''
   }
@@ -239,6 +244,7 @@ async function callGroqChat(
   })
 
   if (!response.ok) {
+    // eslint-disable-next-line no-console
     console.error('Groq API error:', response.status, response.statusText)
     return ''
   }

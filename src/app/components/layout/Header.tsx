@@ -20,29 +20,29 @@ export function Header() {
             <div className="space-y-3">
               <div className="bg-white/20 rounded-lg p-3">
                 <p className="text-white text-sm font-medium mb-1">📊 Sales & Analytics</p>
-                <p className="text-white/90 text-sm">"How many copies of The Hunger Games have been sold?"</p>
+                <p className="text-white/90 text-sm">&ldquo;How many copies of The Hunger Games have been sold?&rdquo;</p>
               </div>
               <div className="bg-white/20 rounded-lg p-3">
                 <p className="text-white text-sm font-medium mb-1">⭐ Customer Reviews</p>
-                <p className="text-white/90 text-sm">"What do customers think about The Fellowship of the Ring?"</p>
+                <p className="text-white/90 text-sm">&ldquo;What do customers think about The Fellowship of the Ring?&rdquo;</p>
               </div>
               <div className="bg-white/20 rounded-lg p-3">
                 <p className="text-white text-sm font-medium mb-1">📈 Bestsellers</p>
-                <p className="text-white/90 text-sm">"What's the most popular book in your catalog?"</p>
+                <p className="text-white/90 text-sm">&ldquo;What&apos;s the most popular book in your catalog?&rdquo;</p>
               </div>
             </div>
             <div className="space-y-3">
               <div className="bg-white/20 rounded-lg p-3">
                 <p className="text-white text-sm font-medium mb-1">🚚 Delivery Times</p>
-                <p className="text-white/90 text-sm">"What are the fastest and slowest delivery times?"</p>
+                <p className="text-white/90 text-sm">&ldquo;What are the fastest and slowest delivery times?&rdquo;</p>
               </div>
               <div className="bg-white/20 rounded-lg p-3">
                 <p className="text-white text-sm font-medium mb-1">📚 Book Information</p>
-                <p className="text-white/90 text-sm">"Tell me more about Mockingjay"</p>
+                <p className="text-white/90 text-sm">&ldquo;Tell me more about Mockingjay&rdquo;</p>
               </div>
               <div className="bg-white/20 rounded-lg p-3">
                 <p className="text-white text-sm font-medium mb-1">💬 All Reviews</p>
-                <p className="text-white/90 text-sm">"Show me all customer reviews"</p>
+                <p className="text-white/90 text-sm">&ldquo;Show me all customer reviews&rdquo;</p>
               </div>
             </div>
           </div>

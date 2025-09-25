@@ -1,18 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Header } from '@/app/components/layout/Header'
 import { ProductList } from '@/app/components/product/ProductList'
 import { ProductModal } from '@/app/components/product/ProductModal'
 import { ChatbotUI } from '@/app/components/chatbot/ChatbotUI'
 import { useProductModal } from '@/app/hooks/useProductModal'
 import { Product } from '@/app/types'
-import { generateId } from '@/app/lib/utils'
 
 export default function HomePage() {
   const { selectedProduct, isOpen, openModal, closeModal } = useProductModal()
   const [userActivity, setUserActivity] = useState<string[]>([])
-  const [userId] = useState(() => generateId()) // Simple session ID for demo
 
   const handleProductClick = (product: Product) => {
     // Track user activity

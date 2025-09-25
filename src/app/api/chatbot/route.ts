@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { generateChatResponse } from '@/app/lib/llm/gpt'
-import { ChatContext, ChatMessage, Product } from '@/app/types'
+import { ChatContext, Product } from '@/app/types'
 import { getProducts, getProductReviews, getProductSales, getAllProductSales, getAllReviews } from '@/app/lib/supabase/queries'
 
 export async function POST(request: Request) {
@@ -59,6 +59,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: response })
 
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Chatbot API error:', error)
     return NextResponse.json(
       { error: 'Failed to process message' },

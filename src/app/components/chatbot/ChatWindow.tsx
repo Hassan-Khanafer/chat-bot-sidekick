@@ -24,7 +24,7 @@ export function ChatWindow({ messages, isLoading }: ChatWindowProps) {
       {messages.length === 0 ? (
         <div className="text-center text-medium-gray py-8">
           <p className="text-sm">
-            Hi! I'm your AI Sidekick. I can help you with information about our books, 
+            Hi! I&apos;m your AI Sidekick. I can help you with information about our books, 
             reviews, and recommendations. What would you like to know?
           </p>
         </div>

@@ -1,5 +1,5 @@
 import { supabase } from './client'
-import type { Product, UserActivity, Review, User } from '@/app/types'
+import type { Product, UserActivity, Review } from '@/app/types'
 
 // Product queries
 export async function getProducts(): Promise<Product[]> {
@@ -9,6 +9,7 @@ export async function getProducts(): Promise<Product[]> {
     .order('name')
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching products:', error)
     return []
   }
@@ -24,6 +25,7 @@ export async function getProductById(id: string): Promise<Product | null> {
     .single()
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching product:', error)
     return null
   }
@@ -39,6 +41,7 @@ export async function getProductsByTrilogyId(trilogyId: string): Promise<Product
     .order('trilogy_order')
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching trilogy products:', error)
     return []
   }
@@ -57,6 +60,7 @@ export async function logUserActivity(userId: string, productId: string, activit
     })
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error logging user activity:', error)
   }
 }
@@ -69,6 +73,7 @@ export async function getUserActivity(userId: string): Promise<UserActivity[]> {
     .order('timestamp', { ascending: false })
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching user activity:', error)
     return []
   }
@@ -85,6 +90,7 @@ export async function getProductReviews(productId: string): Promise<Review[]> {
     .order('created_at', { ascending: false })
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching reviews:', error)
     return []
   }
@@ -99,6 +105,7 @@ export async function getAllReviews(): Promise<Review[]> {
     .order('created_at', { ascending: false })
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching all reviews:', error)
     return []
   }
@@ -114,6 +121,7 @@ export async function getReviewsByRating(rating: number): Promise<Review[]> {
     .order('created_at', { ascending: false })
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching reviews by rating:', error)
     return []
   }
@@ -130,6 +138,7 @@ export async function getProductSales(productId: string): Promise<number> {
     .single()
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching sales:', error)
     return 0
   }
@@ -143,6 +152,7 @@ export async function getAllProductSales(): Promise<Array<{ product_id: string; 
     .select('product_id, quantity_sold')
 
   if (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching all sales:', error)
     return []
   }

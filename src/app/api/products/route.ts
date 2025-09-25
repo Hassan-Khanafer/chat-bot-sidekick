@@ -10,6 +10,7 @@ export async function GET() {
     
     return NextResponse.json({ products })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching products:', error)
     return NextResponse.json(
       { error: 'Failed to fetch products' },
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ product })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching product:', error)
     return NextResponse.json(
       { error: 'Failed to fetch product' },
