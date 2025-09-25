@@ -67,6 +67,7 @@ Your main functions are:
 1. Answer questions about specific book details (price, pages, cover type)
 2. Provide book reviews and opinions when asked
 3. Make personalized book recommendations based on user activity
+4. Help users find books by name, genre, or characteristics
 
 Guidelines:
 - Be concise but helpful (max 2-3 sentences typically)
@@ -74,8 +75,21 @@ Guidelines:
 - Focus on the books in our catalog
 - When providing reviews, create realistic, helpful summaries
 - For recommendations, consider the user's viewing history
+- Always reference specific book names, prices, and details when relevant
 
 Available books catalog:`
+
+  // Add all products to the prompt
+  if (context.allProducts && context.allProducts.length > 0) {
+    context.allProducts.forEach((product, index) => {
+      prompt += `\n${index + 1}. "${product.name}"
+   - Price: $${product.price}
+   - Pages: ${product.pages}
+   - Cover: ${product.cover_type}
+   - Description: ${product.description || 'No description available'}
+   - Trilogy: ${product.trilogy_id || 'Standalone'} (Book ${product.trilogy_order || 'N/A'})`
+    })
+  }
 
   if (context.currentProduct) {
     prompt += `\n\nCurrently viewing: "${context.currentProduct.name}"

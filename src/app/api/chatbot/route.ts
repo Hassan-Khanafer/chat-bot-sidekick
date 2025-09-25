@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { generateChatResponse } from '@/app/lib/llm/gpt'
 import { ChatContext, ChatMessage, Product } from '@/app/types'
-import productsData from '@/data/products.json'
+import { getProducts, getProductReviews } from '@/app/lib/supabase/queries'
 
 export async function POST(request: Request) {
   try {
@@ -15,25 +15,29 @@ export async function POST(request: Request) {
       )
     }
 
-    // Build context for the LLM
+    // Fetch products from database
+    const products = await getProducts()
+    
+    // Build context for the LLM with database products
     const chatContext: ChatContext = {
       currentProduct: context?.currentProduct,
       userActivity: context?.userActivity || [],
-      conversationHistory: context?.conversationHistory || []
+      conversationHistory: context?.conversationHistory || [],
+      allProducts: products // Add all products to context
     }
 
     // Check for personalization opportunities
     const personalizationResponse = checkForPersonalization(
       message, 
       chatContext, 
-      productsData.products as Product[]
+      products
     )
 
     if (personalizationResponse) {
       return NextResponse.json({ message: personalizationResponse })
     }
 
-    // Generate response using OpenAI
+    // Generate response using LLM
     const response = await generateChatResponse(
       message,
       chatContext,

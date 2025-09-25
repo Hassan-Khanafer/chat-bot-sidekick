@@ -20,6 +20,7 @@ export interface ChatContext {
   currentProduct?: ChatContextProduct;
   userActivity?: UserActivity[];
   conversationHistory?: ChatMessage[];
+  allProducts?: ChatContextProduct[];
 }
 
 export interface ChatResponse {
