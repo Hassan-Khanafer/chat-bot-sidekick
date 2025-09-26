@@ -41,7 +41,7 @@ This project demonstrates the integration of an AI chatbot into a mock e-commerc
      - OpenAI API key
 
 3. **Set up database**:
-   - Create tables in Supabase (see schema in documentation)
+   - Create tables in Supabase (see schema in `SQL_Files/database-schema.sql`)
    - Populate with sample book data
 
 4. **Run development server**:

@@ -405,6 +405,8 @@ SCHEMADESIGN
 
 This document outlines the database schema design for the "Chat Bot Sidekick" project, a proof-of-concept e-commerce website featuring a chatbot assistant. The schema is designed to support core functionalities including product display, user activity tracking for personalization, and product reviews. The chosen database system is Supabase, leveraging PostgreSQL capabilities.
 
+**Note**: The complete database schema and setup scripts are located in the `SQL_Files/` directory.
+
 
 
 ## 1. Database System
