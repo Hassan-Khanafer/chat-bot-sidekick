@@ -2,6 +2,24 @@
 
 A proof-of-concept e-commerce website featuring an AI-powered chatbot assistant that provides product information, reviews, and personalized suggestions.
 
+## Prompts
+
+To build this website, I used VibeCodeDocs, Claude, and Cursor.
+
+**VibeCodeDocs** is an AI software that helped build the thorough documentation you find in this README. It generated it with the following prompt:
+
+> "I want to create a mock e-commerce website with a chatbot that can answer a few questions about each product. Additionally, I'd like the chatbot to provide reviews of the products and offer personalized suggestions based on my activity on the website. This is only a proof of concept, and we just want to show developers the feasibility.
+> 
+> There will be pre-filled SQL files with hardcoded answers about the products. The website will be a single page with a quick summary at the top. Scrolling down will reveal the different products available. Each product should be clickable, and when clicked, display metadata such as cost, size, estimated delivery time, and so on.
+> 
+> There should also be a small character on the side of the page that serves as the AI assistant to help answer questions. The AI assistant should follow the user as they scroll down. The color theme should be similar to Shopify's colors."
+
+Once the full documentation was generated, I inserted it into **Claude** with the following prompt:
+
+> "Create this webapp in the Projects folder under APM Prototype. For any API keys or secrets, put them in a .env.local file so they can be set later. Use the most recent versions for packages and third party dependencies."
+
+Then, I took the Claude-generated project, inserted it into **Cursor**, and refined it incrementally with the AI agent until I got the current website.
+
 ## Overview
 
 This project demonstrates the integration of an AI chatbot into a mock e-commerce environment using modern web technologies. The chatbot can answer questions about products, provide reviews, and offer personalized recommendations based on user activity.
